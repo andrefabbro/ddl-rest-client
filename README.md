@@ -68,3 +68,16 @@ Perform a GET to the service passing the id as parameter, example: http://localh
     },
 ...
 ```
+
+You can use [JsonPath](https://github.com/json-path/JsonPath/) to get the itens of the list and use as a data provider for your forms, for example:
+
+```
+$..fieldValues[?(@.name == 'profession')].value.en_US
+```
+
+Should retrive the 'profession' field of the list:
+
+```
+
+```
+
