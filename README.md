@@ -20,7 +20,7 @@ Get the id of the DDL:
 
 Perform a GET to the service passing the id as parameter, example: http://localhost:8080/o/dynamic-data-list-client/ddlclient/get-data-by-record-set-id/${id-of-the-ddl}, replacing *${id-of-the-ddl}* for the DDL id. The result should be like the following:
 
-```
+```json
 [
     {
         "availableLanguageIds": [
@@ -69,15 +69,10 @@ Perform a GET to the service passing the id as parameter, example: http://localh
 ...
 ```
 
-You can use [JsonPath](https://github.com/json-path/JsonPath/) to get the itens of the list and use as a data provider for your forms, for example:
+You can use [JsonPath](https://github.com/json-path/JsonPath/) to get the itens of the list and use as a data provider for your forms, for example the following:
 
 ```
 $..fieldValues[?(@.name == 'profession')].value.en_US
 ```
 
-Should retrive the 'profession' field of the list:
-
-```
-
-```
-
+Should retrive the *profession* field.
