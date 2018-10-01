@@ -1,0 +1,4 @@
+Bundle-Name: Dynamic Data List REST Client
+Bundle-SymbolicName: com.liferay.ext.ddl.rest.client
+Bundle-Version: 1.0.0
+Liferay-Configuration-Path: /configuration
