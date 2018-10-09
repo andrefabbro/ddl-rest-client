@@ -19,6 +19,8 @@ import org.osgi.service.component.annotations.Reference;
 import com.liferay.ext.ddl.rest.client.service.DynamicDataListRestClientService;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.GroupThreadLocal;
+import com.liferay.portal.kernel.util.PortalUtil;
 
 /**
  * @author André Fabbro
@@ -26,7 +28,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 @ApplicationPath("/ddlclient")
 @Component(immediate = true, service = Application.class)
 public class DDLRestClientApplication extends Application {
-	
+
 	private Log _log = LogFactoryUtil.getLog(DDLRestClientApplication.class.getName());
 
 	@Reference
@@ -47,12 +49,34 @@ public class DDLRestClientApplication extends Application {
 	@GET
 	@Path("/get-data-by-record-set-id/{recordSetId}")
 	@Produces("application/json")
-	public String hello(@PathParam("recordSetId") String recordSetId) {
+	public String getRecordSetContentsById(@PathParam("recordSetId") String recordSetId) {
 
 		List<String> results = new ArrayList<String>();
 
 		try {
 			results = service.findDataByRecordSetId(Long.parseLong(recordSetId));
+		} catch (Exception e) {
+			e.printStackTrace();
+			_log.error(e.getMessage());
+		}
+
+		StringBuffer res = new StringBuffer("[");
+		res.append(results.stream().collect(Collectors.joining(",")));
+		res.append("]");
+
+		return res.toString();
+	}
+
+	@GET
+	@Path("/get-data-by-record-set-name/{recordSetName}")
+	@Produces("application/json")
+	public String getRecordSetContentsByName(@PathParam("recordSetName") String recordSetName) {
+
+		List<String> results = new ArrayList<String>();
+
+		try {
+			results = service.findDataByRecordSetName(recordSetName, PortalUtil.getDefaultCompanyId(),
+					GroupThreadLocal.getGroupId());
 		} catch (Exception e) {
 			e.printStackTrace();
 			_log.error(e.getMessage());

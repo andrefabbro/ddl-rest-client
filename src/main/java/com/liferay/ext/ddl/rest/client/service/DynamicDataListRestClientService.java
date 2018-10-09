@@ -17,5 +17,7 @@ public interface DynamicDataListRestClientService {
 	 * @throws Exception
 	 */
 	List<String> findDataByRecordSetId(Long recordSetId) throws Exception;
+	
+	List<String> findDataByRecordSetName(String recordSetName, Long companyId, Long groupId) throws Exception;
 
 }
