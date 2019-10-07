@@ -76,3 +76,20 @@ $..fieldValues[?(@.name == 'profession')].value.en_US
 ```
 
 Should retrive the *profession* field.
+
+## Deploy Instructions
+
+Start a Liferay DXP 7.1 instance, then go to this project folder and execute:
+
+For Linux or Mac OS
+
+```
+./gradlew deploy
+```
+
+For Windows:
+
+```
+gradlew.bat deploy
+```
+
